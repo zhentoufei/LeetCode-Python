@@ -21,7 +21,6 @@ class Solution:
         self.postorder(root.right)
         self.ans.append(root.val)
 
-
     def postorderTraversal_1(self, root: TreeNode):
         if root is None:
             return []
