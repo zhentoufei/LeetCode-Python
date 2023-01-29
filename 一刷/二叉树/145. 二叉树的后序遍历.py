@@ -36,3 +36,4 @@ class Solution:
                 stack.append(temp_node.right)
         order.reverse()
         return order
+
