@@ -4,7 +4,6 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
 class Solution:
     '''
     https://leetcode.cn/problems/path-sum-iii/solution/dui-qian-zhui-he-jie-fa-de-yi-dian-jie-s-dey6/
