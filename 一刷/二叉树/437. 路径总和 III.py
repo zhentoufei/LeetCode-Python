@@ -17,12 +17,7 @@ class Solution:
         return self.rec(root, 0)  # 前缀和的递归回溯思路
 
     def rec(self, node: TreeNode, cur_sum: int):
-        """
 
-        :param node:
-        :param cur_sum:
-        :return:
-        """
         if not node:
             return 0
         ans = 0
