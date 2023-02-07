@@ -5,25 +5,63 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
+    # BFS
+    def serialize(self, root: TreeNode):
 
-    def buildTree(self, preorder: list, inorder: list):
-        index = {ele: i for i, ele in enumerate(inorder)}
-        size = len(preorder)
-        return self.helper(0, size - 1, 0, size - 1, index, preorder, inorder)
+        if not root:
+            return ''
 
-    def helper(self, pre_left: int, pre_right: int, in_left: int, in_right: int, index: dict, preorder: list,
-               inorder: list):
-        if pre_left > pre_right:
-            return None
+        queue = []
+        ans = []
+        queue.append(root)
+        while queue:
+            current = queue.pop(0)
+            if current:
+                ans.append(current.val)
+                queue.append(current.left)
+                queue.append(current.right)
+            else:
+                ans.append('None')
+        return '[' + ','.join(ans) + ']'
 
-        pre_root = pre_left
-        in_root = index[preorder[pre_root]]
-        root = TreeNode(preorder[pre_root])
-        size_left_subtree = in_root - in_left
+    def deserialize(self, data: str):
+        if not data:
+            return []
+        data = data[1:-1].split(',')
+        root = TreeNode(int(data[0]))
+        queue = []
+        queue.append(root)
+        index = 1
+        while queue:
+            current = queue.pop(0)
+            if data[index] != 'None':
+                current.left = TreeNode(int(data[index]))
+                queue.append(current.left)
+            index += 1
 
-        root.left = self.helper(pre_left + 1, pre_left + size_left_subtree, in_left, in_root - 1, index, preorder,
-                                inorder)
-        root.right = self.helper(pre_left + size_left_subtree + 1, pre_right, in_root + 1, in_right, index, preorder,
-                                 inorder)
+            if data[index] != 'None':
+                current.right = TreeNode(int(data[index]))
+                queue.append(current.right)
+            index += 1
         return root
+
+
+class Solution2:
+
+    def serialize(self, root: TreeNode):
+        if not root:
+            return 'None'
+        return str(root.val) + ',' + self.serialize(root.left) + ',' + self.serialize(root.right)
+
+    def deserialize(self, data: str):
+        return self.helper(data[1:-1].split(','))
+
+    def helper(self, data: list):
+        current = data.pop(0)
+        if current == 'None':
+            return None
+        node = TreeNode(int(current))
+        node.left = self.helper(data)
+        node.right = self.helper(data)
+        return node
