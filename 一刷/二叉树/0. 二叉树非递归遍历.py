@@ -16,64 +16,80 @@ class TreeNode(object):
 
 
 class Tree(object):
-    def __init__(self, tree_node=None):
+    def __init__(self, tree_node: TreeNode = None):
         self.root = tree_node
+        self.ans = []
 
-    def pre_order(self):
-        if self.root is None:
-            return []
-        order = []
-        stack = [self.root]
-        while len(stack) != 0:
-            temp_node = stack.pop()
-            order.append(temp_node.val)
-            if temp_node.right is not None:
-                stack.append(temp_node.right)
-            if temp_node.left is not None:
-                stack.append(temp_node.left)
-        return order
-
-    def middle_order(self):
-        order = []
+    def pre_order(self, root: TreeNode):
+        if root is None:
+            return
         stack = []
-        temp_node = self.root
-        while temp_node is not None or len(stack) != 0:
-            if temp_node is not None:
-                stack.append(temp_node)
-                temp_node = temp_node.left
-            else:
-                temp_node = stack.pop()
-                order.append(temp_node.val)
-                temp_node = temp_node.right
-        return order
+        res = []
+        node = root
+        while node is not None or stack is not None:
+            while node:
+                res.append(node.val)
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            node = node.right
+        return res
 
-    def after_order(self):
-        if self.root is None:
-            return []
-        order = []
-        stack = []
-        stack.append(self.root)
-        while len(stack) != 0:
-            temp_node = stack.pop()
-            order.append(temp_node.val)
-            if temp_node.left is not None:
-                stack.append(temp_node.left)
-            if temp_node.right is not None:
-                stack.append(temp_node.right)
-        order.reverse()
-        return order
+    def pre_order_rec(self, root: TreeNode):
+        if root is None:
+            return
 
-    def sequence_order(self):
-        if self.root is None:
-            return []
-        order = []
+        self.ans.append(root.val)
+        self.pre_order_rec(root.left)
+        self.pre_order_rec(root.right)
+        return self.ans
+
+    def mid_order(self, root: TreeNode):
+        if root is None:
+            return
+
         stack = []
-        stack.append(self.root)
-        while len(stack) != 0:
-            temp_node = stack.pop(0)
-            order.append(temp_node.val)
-            if temp_node.left is not None:
-                stack.append(temp_node.left)
-            if temp_node.right is not None:
-                stack.append(temp_node.right)
-        return order
+        ans = []
+        node = root
+        while node is not None or stack is not None:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            ans.append(node.val)
+            node = node.right
+        return ans
+
+    def mid_order_rec(self, root: TreeNode):
+        if root is None:
+            return
+
+        self.mid_order_rec(root.left)
+        self.ans.append(root.val)
+        self.mid_order_rec(root.right)
+        return self.ans
+
+    def post_order(self, root: TreeNode):
+        if root is None:
+            return
+
+        stack = []
+        ans = []
+        node = root
+        while node is not None or stack is not None:
+            while node is not None:
+                ans.insert(0, node.val)
+                stack.append(node)
+                node = node.right
+            node = stack.pop()
+            node = node.left
+        return ans
+
+    def post_order_rec(self, root: TreeNode):
+        if root is None:
+            return
+
+        self.post_order_rec(root.left)
+        self.post_order_rec(root.right)
+        self.ans.append(root.val)
+        return self.ans

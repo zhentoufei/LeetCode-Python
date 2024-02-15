@@ -1,3 +1,6 @@
+import collections
+
+
 class Solution:
 
     def maxProfit(self, prices: list):
@@ -17,3 +20,11 @@ class Solution:
                 dp[i][1] = max(dp[i - 1][1], - prices[i])
 
         return dp[size-1][0]
+
+
+if __name__ == '__main__':
+    a = collections.deque()
+    a.append(3)
+    a.append(5)
+    a.append(1)
+    print(a)
