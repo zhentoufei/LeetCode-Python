@@ -26,7 +26,7 @@ class Tree(object):
         stack = []
         res = []
         node = root
-        while node is not None or stack is not None:
+        while node is not None or stack:
             while node:
                 res.append(node.val)
                 stack.append(node)
@@ -51,7 +51,7 @@ class Tree(object):
         stack = []
         ans = []
         node = root
-        while node is not None or stack is not None:
+        while node is not None or stack:
             while node:
                 stack.append(node)
                 node = node.left
@@ -76,7 +76,7 @@ class Tree(object):
         stack = []
         ans = []
         node = root
-        while node is not None or stack is not None:
+        while node is not None or stack:
             while node is not None:
                 ans.insert(0, node.val)
                 stack.append(node)
