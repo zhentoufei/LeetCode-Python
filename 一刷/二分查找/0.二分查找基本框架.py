@@ -1,55 +1,48 @@
-# https://blog.csdn.net/qq_41221520/article/details/108277801
+# https://www.bilibili.com/video/BV1d54y1q7k7/?spm_id_from=333.337.search-card.all.click&vd_source=6eb66f36703a554cc83a9f4cb7f5560a
 
 class Solution:
-    # 查找某个值
+    def find_target_1st(self, nums: list, target: int):
 
-    def binarySearch(self, nums: list, target: int):
-        size = len(nums)
-        left = 0
-        right = size - 1
-        while left <= right:
+        left = -1
+        right = len(nums)
+
+        while left + 1 != right:
             mid = left + (right - left) // 2
-            if nums[mid] == target:
-                return mid
-
             if nums[mid] < target:
-                left = mid + 1
+                left = mid
             else:
-                right = mid - 1
-        return -1
+                right = mid
+        return right
 
-    # 查找第一个大于（大于等于） target 的值
-    def binarySearchBigger(self, nums: list, target: int):
-        size = len(nums)
-        left = 0
-        right = size - 1
+    def find_target_last(self, nums: list, target: int):
 
-        while left <= right:
+        left = -1
+        right = len(nums)
+
+        while left + 1 != right:
             mid = left + (right - left) // 2
-            # 下面是求大于 target的值，如果是大于等于，只需要将 if 里的判断条件改为 if(array[mid] < target) 即可。
             if nums[mid] <= target:
-                left = mid + 1
+                left = mid
             else:
-                right = mid - 1
+                right = mid
         return left
 
-    # 查找第一个小于（小于等于） target 的值
-    def binarySearchSmaller(self, nums: list, target: int):
-        size = len(nums)
-        left = 0
-        right = size - 1
-        while left <= right:
+    def find_1st(self, nums, target):
+        left = -1
+        right = len(nums)
+        while left + 1 != right:
             mid = left + (right - left) // 2
-            # 下面是求小于的值，如果小于等于，只需要将 if 里的判断条件改为 if(array[mid] > target) 即可。
-            if nums[mid] >= target:
-                right = mid - 1
+            if nums[mid] < target:
+                left = mid
             else:
-                left = mid + 1
-        return right
+                right = mid
+        if right < len(nums) and nums[right] == target:
+            return right
+        return -1
 
 
 if __name__ == '__main__':
     cls = Solution()
-    nums = [0, 1, 2, 3, 4, 5, 6]
-    target = 2
-    print(cls.binarySearchBigger(nums, target))
+    nums = [2, 2]
+    target = 3
+    print(cls.find_1st(nums, target))
