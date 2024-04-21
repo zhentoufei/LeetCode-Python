@@ -20,12 +20,19 @@ class Solution:
         temp[left:right + 1] = record[left:right + 1]
         for k in range(left, right + 1):
             if i == mid + 1:
+                # 当左边数组遍历完成
                 record[k] = temp[j]
                 j += 1
-            elif j == right + 1 or temp[i] <= temp[j]:
+            elif j == right + 1:
+                # 当右边数组遍历完成
+                record[k] = temp[i]
+                i += 1
+            elif temp[i] <= temp[j]:
+                # 当没有超出两个数组的范围，仅仅是，稳定的排序
                 record[k] = temp[i]
                 i += 1
             else:
+                # 右边数组开始放入到对应的数组中
                 record[k] = temp[j]
                 j += 1
                 ans += mid - i + 1  # 统计逆序对
