@@ -37,3 +37,4 @@ class Solution:
                 j += 1
                 ans += mid - i + 1  # 统计逆序对
         return ans
+
