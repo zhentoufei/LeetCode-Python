@@ -39,7 +39,7 @@ class Solution:
 
 
 if __name__ == '__main__':
-    text1 = "abc"
+    text1 = "abdec"
     text2 = "def"
     so = Solution()
     print(so.longestCommonSubsequence(text1, text2))
