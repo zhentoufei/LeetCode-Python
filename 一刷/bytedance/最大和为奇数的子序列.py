@@ -1,11 +1,11 @@
 class Solution:
     '''
-    最大和为奇数的子数列的数目
+    和为奇数的子数列的数目
     '''
 
     def numOfSubarrays1(self, arr: list) -> int:
         size = len(arr)
-        dp_odd = [0] * size  # 和为奇数的dp
+        dp_odd = [0] * size  # 和为奇数的dp，dp_odd[i]表示，以arr[i]为结尾，且子数组的和是奇数的子序列的个数
         dp_even = [0] * size  # 和为偶数的dp
 
         ans = 0

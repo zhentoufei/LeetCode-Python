@@ -8,6 +8,7 @@ class Solution:
 
         i_min = 0
         i_max = size_1
+        # 通过某种划分，使得左边数组元素的个数比右边数组元素个数多一个
         while i_min <= i_max:
             i = (i_min + i_max) // 2
             j = (size_1 + size_2 + 1) // 2 - i

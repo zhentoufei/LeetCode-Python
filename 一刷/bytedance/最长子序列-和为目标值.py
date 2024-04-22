@@ -5,10 +5,7 @@ class Solution:
         for x in nums:
             s = min(s + x, target)
             for j in range(s, x - 1, -1):
-                # f[j] = max(f[j], f[j - x] + 1)
-                # 手写 max 效率更高
-                if f[j] < f[j - x] + 1:
-                    f[j] = f[j - x] + 1
+                f[j] = max(f[j], f[j - x] + 1)
         return f[-1] if f[-1] > 0 else -1
 
 
